@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "ContactUs";
+    Layout = "~/Views/Shared/_CustomLayout.cshtml";
+}
+
+<!Doctype html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Contact</title>
+              
+        <style>
+            .rcorners {
+                border-radius: 25px; 
+                border: 2px solid #000000 ;
+                padding: 20px;
+            }
+        </style>
+        
+    </head>
+    <body>
+        <div class="row" style="text-align:center">
+            <div class="col-sm-6 col-sm-offset-3 ">
+               
+        <h3 style="font-family:'Monotype Corsiva';margin-top:10px ;margin-bottom:10px; text-align:center"><span class="glyphicon glyphicon-envelope"></span> Contact Us</h3>
+        
+        <form class="rcorners"  action="/Client/SaveMessages" method="post">
+            <input  type="text" placeholder="Name" name="Name" required style="height:30px ; width:300px ;font-size:small; border-radius: 25px; border: 2px solid #D3D3D3; padding: 20px;" />
+            <br />
+            <br />
+            <input type="email" placeholder="Email" name="Email" required style="height:30px ; width:300px ;font-size:small ; border-radius: 25px; border: 2px solid #D3D3D3; padding: 20px;" />
+            <br />
+            <br />
+            <textarea rows="6" placeholder="Message" name="Message1" required style="height:200px;width:300px ;font-size:small ; border-radius: 25px; border: 2px solid #D3D3D3; padding: 20px;"></textarea>
+            <br />
+            <br />
+            <button type="submit" class="btn btn-warning" style="height:40px ; width:300px">Send</button>
+                
+        </form>
+            </div>
+        </div>
+    </body>
+</html>

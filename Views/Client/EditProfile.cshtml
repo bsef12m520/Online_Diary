@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "EditProfile";
+    Layout = "~/Views/Shared/_CustomLayoutWrite.cshtml";
+
+}
+@model OnlineDiary.Models.User
+
+<!Doctype Html>
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        
+        <img src="/Profile/@Model.Profile" width="50" height="50" />
+        <small>@Model.FirstName @Model.LastName</small>
+        <br />
+        <br />
+        @using (Html.BeginForm("SaveChangedProfile", "Client", FormMethod.Post, new { enctype = "multipart/form-data" ,style="margin-left:20px"}))
+        {
+            <label>First Name</label> @Html.EditorFor(m => m.FirstName)
+            <br />
+            <br />
+            <label>Last Name</label> @Html.EditorFor(m => m.LastName)
+            <br />
+            <br />
+            <label style="margin-right:30px">Email</label> @Html.EditorFor(m => m.Email)
+            <br />
+            <br />
+            <label>Password</label> @Html.EditorFor(m => m.Password)
+            <br />
+            <br />
+            <input type="file" name="Profile" style="font-size:15px" />
+            <br />
+            <br />
+            <input type="submit"value="Save Changes"  class="btn btn-primary" style="height:40px ; width:120px; font-size:13px">
+        }
+    </body>
+</html>
+

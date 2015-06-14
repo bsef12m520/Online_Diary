@@ -1,0 +1,200 @@
+﻿@{
+    ViewBag.Title = "NewsFeed";
+    Layout = "~/Views/Shared/_CustomLayout.cshtml";
+}
+@using OnlineDiary.Models;
+
+@{List<Category>c=(List<Category>)HttpContext.Current.Session["Category"];}
+@{List<User> u = (List<User>)HttpContext.Current.Session["User"];}
+@{List<List<Comment>> cList = (List<List<Comment>>)HttpContext.Current.Session["Comments"];}
+@{List<String> uName = (List<String>)HttpContext.Current.Session["UserName"];}
+@{List<Object> uComment=(List<Object>)HttpContext.Current.Session["UserComment"];}
+@{List< User> commUserList = (List<User>)HttpContext.Current.Session["CommUserList"];}
+
+<!Doctype Html>
+<html>
+
+    <head>
+        <title>
+         
+        </title>
+        <style>
+            .rcorners {
+                border-radius: 25px; 
+                border: 2px solid #000000 ;
+                padding: 20px;
+            }
+        </style>
+   
+    </head>
+    <body>
+        <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+        
+             <div class="list-group">
+                 <a  style="font-family:'Monotype Corsiva' ;font-size:x-large" class="list-group-item active"> Categories</a>
+                 <a href="/Client/NewsFeed" style="font-family:'Monotype Corsiva' ;font-size:large"  class="list-group-item"> All</a>
+                 @foreach(var i in c)
+                 {
+                     if(!@i.CategoryName.Equals("None"))
+                     {
+                        
+                        <a href='@Url.Action("NewsFeed","Client",new{CategoryName=@i.CategoryName})' style="font-family:'Monotype Corsiva' ;font-size:large"  class="list-group-item" >@i.CategoryName</a>
+                    }
+                    
+                 }
+             </div>
+             </div>
+            <div class ="col-md-4">
+                
+                <h4 style="font-family:'Monotype Corsiva';margin-left:30px; font-size:20px"><b>Post your Views</b></h4>
+                <form action="/Client/SavePost" method="post" enctype = "multipart/form-data">
+                 <div id="post">
+                    <textarea rows="6" placeholder="Share your Thoughts" required name="Content" style="height:150px;width:500px;margin-left:30px ;font-size:small ; border: 2px solid #D3D3D3; padding: 20px;"></textarea>
+                </div>
+                <div>
+                    <h4 style="font-family:'Monotype Corsiva';margin-left:30px; font-size:20px"><b>Select Category of Post</b></h4>
+                    <select name="Category" style="margin-left:25px">
+                    @foreach(var i in c)
+                    {
+                            <option value="@i.CategoryName">@i.CategoryName</option>
+               
+                    }
+                    </select>
+                </div>
+                    <br />
+                    <input type="file" name="Photo" style="font-size:15px; margin-left:25px" />
+                    <br />
+                <div id="button">
+                    <button type="submit" class="btn btn-primary" style="margin-top:20px; margin-left:430px; width:100px">Post</button>
+                 </div>
+
+                </form>
+                
+                <br />
+                <br />
+                <br />
+                <div id="ViewPost" class="container">
+                    <div class=" row">
+                      @foreach(var j in @u)
+                      {
+                    <div class="col-md-1" style="margin-left:25px">
+
+                        <img src="/Profile/@j.Profile"  width="70" height="70"/>
+                    </div>
+                    <div class="col-md-2" style="margin-left:10px">
+                        <b >@j.FirstName</b>
+                        <b >@j.LastName</b>
+                        <br />
+                        <small>@j.Email</small>
+                    </div>
+                          <br />
+                          <br />
+                          <br />
+                          <br />
+                          <br />
+                       
+                    foreach(var i in @Model)
+                    {
+                        
+                       
+                        if(j.Id.Equals(@i.UserId))
+                        {
+                        <form class="rcorners" action="/Client/SaveComments" method="post" onclick="validate" style=" padding:10px;border:solid; margin-left:25px; border-color:lightgray; width:500px ;text-align:left">
+                            @if(@i.Photo!=null)
+                            {  
+                                <img src="/Posts/@i.Photo"  width="450" height="300" style="margin-left:12px"/>
+                            }
+                            <br />
+                            <br />
+                            <table  border="1" style="width:95%; border-color:black; margin-left:12px">
+                                <tr>                                  
+                                <td style="padding:5px"><h5 style="color:black">@i.Content</h5></td>                                
+                              </tr>
+                             </table>
+                            <h6 style="color:yellowgreen;margin-left:12px">@i.Likes people likes this</h6>
+
+                            @if(Session["ImageVlaue"]=="true")
+                            {
+                            <a href='@Url.Action("AddLike", "Client", new { PostId=@i.Id, ImageName=@Session["Image"]})'>
+                               <img src="@Session["Image"]" style="margin-top:5px;margin-left:12px">      
+                            </a>
+                            }
+                          
+                             
+                            <a href='@Url.Action("AddLike", "Client", new { PostId=@i.Id, ImageName="/Image/Like.png"})'>
+                               <img src="/Image/Like.png" style="margin-top:5px;margin-left:12px">      
+                            </a>
+                             
+                            <br />
+                            <br />
+                          
+                           
+                            
+                                    @*<input type="text" name="Content" placeholder="Write Comment" style=" width:450px;margin-left:12px"/>
+                                    <a href='@Url.Action("SaveComments", "Client", new { PostId=@i.Id, UserId=@i.UserId})'>
+                                        <img src="/Image/Comment.png" style="margin-top:10px;margin-left:380px;">      
+                                    </a>*@
+                                    <input type="hidden" name="UserId" value="@Session["Uid"]"/>
+                                    <input type="hidden" name="PostId" value="@i.Id"/>
+                                    <input type="text" name="Content" placeholder="Write Comment" style=" width:450px;margin-left:12px"/>
+                                    <button type="submit" class="btn btn-primary" style="margin-top:10px; margin-left:380px; width:70px ;font-size:10px">Comment</button>
+                                    <br />
+                                    
+                                        
+                                        @foreach(var list in cList)
+                                        {     
+                                                    foreach(var sublist in @list)
+                                                    {
+                                                      
+                                                        if(sublist.PostId==@i.Id)
+                                                        {
+                                                                foreach(var commList in commUserList)
+                                                                {
+                                                                   
+                                                                        if(commList.Id==sublist.UserId)
+                                                                        {
+                                                                            <img src="/Profile/@commList.Profile" width="30" height="30" style="margin-left:10px" />
+                                                                            <small>@commList.FirstName  @commList.LastName</small>;
+                                                                            
+                                                                        <br />
+                                                                        }
+                                                                        
+                                                                    
+                                                                    
+                                                                }
+                                                            <div id="comments">
+                                                                
+                                                              <small style="margin-left:25px">@sublist.Content</small>
+                                                                <br />
+                                                               <br />
+                                                            </div>
+                                                        }
+                                                    }
+                                            
+                                            
+                                        
+                                            }
+                                    
+                                    
+                                
+                            
+                      </form>
+                          <br />
+                          <br />
+                          <br />
+                      }
+                        
+                   }
+                    
+               
+                      }
+                 </div>
+                </div>
+            </div>
+         </div>
+         </div>
+        </body>
+
+</html>

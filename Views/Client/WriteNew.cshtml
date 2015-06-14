@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "WriteNew";
+    Layout = "~/Views/Shared/_CustomLayoutWrite.cshtml";
+}
+@model OnlineDiary.Models.Diary
+<!Doctype Html>
+<html>
+    <head>
+        <title>Write</title>
+        <style>
+            .size {
+                width:500px;
+                height:500px;
+            }
+        </style>
+        
+    </head>
+    <body>
+         
+        <div class="container">
+        <div style="text-align:center">
+            <form  action="/Client/SaveDiary" method="post">
+             
+                
+            <input  type="text" placeholder="Title" name="Title" style="height:30px ; width:500px ;font-size:small;  border: 2px solid #D3D3D3; padding: 20px;margin-left:100px;margin-right:100px" />
+            <br />
+            <br />
+                @* @Html.EditorFor(m => m.Description, new {@class="size"})*@
+                 <textarea rows="6" placeholder="Start Writing --->" name="Description" style="height:400px;width:500px ;font-size:small ; border: 2px solid #D3D3D3; padding: 20px;margin-left:100px;margin-right:100px">@Session["Description"]</textarea>
+            <br />
+            <br />
+            <button type="submit" class="btn btn-primary" style="height:40px ; width:100px ; margin:30px"">Save</button>
+
+            
+   
+ 
+    
+</form>
+    <form action="/Client/SaveFile" method="post" enctype="multipart/form-data"style="text-align:center;margin-left:400px;margin-right:250px;margin-top:50px;margin-bottom:50px" >
+     
+    <input type="file" name="document" style="text-align:center" /><input type="submit" value="Upload File" /> 
+    </form>
+            
+                
+            @*<a href="#" style="font-family:Calibri ;font-size:medium ; margin:30px"><span class="glyphicon glyphicon-paperclip"> AttachFile</span></a>
+
+            <a href="#" style="font-family:Calibri ;font-size:medium ; margin:30px"><span class="glyphicon glyphicon-trash"> Delete</span></a>
+            
+            *@
+             
+        
+            </div>
+            </div>
+    </body>
+</html>

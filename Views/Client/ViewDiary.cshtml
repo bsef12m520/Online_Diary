@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "ViewDiary";
+    Layout = "~/Views/Shared/_CustomLayoutView.cshtml";
+}
+
+@using OnlineDiary.Models
+<html>
+    <head>
+        <title></title>
+       
+    </head>
+
+<body>
+    <div class="container">
+
+                    
+                    @if (ViewBag.Message != "")
+                    {
+                        <h3>@ViewBag.Message</h3> 
+                    }
+
+                        @foreach(var i in @Model)
+                        {
+                        if(ViewBag.Data=="true")
+                        {
+                            <form action="#" method="post" style="border:solid; border-color:black;margin-left:200px; margin-right:200px; margin-top:30px">
+                                <h4 style="margin:20px">Title: <small style="color:black">@i.Title</small> </h4>
+                        
+                        
+                        
+                                <h4 style="margin:20px">Date: <small style="color:black">@i.Date</small></h4>
+                       
+                        
+                                <h4 style="margin:20px">Description: <small style="color:black">@i.Description</small></h4>
+                       
+                        
+                                        
+                            </form>
+                        }
+                    }
+
+           
+      </div>
+    </body>
+    </html>

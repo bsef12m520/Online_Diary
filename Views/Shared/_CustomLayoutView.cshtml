@@ -1,0 +1,49 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>_CustomLayoutWrite</title>
+     <link href="~/Content/bootstrap.css" rel="stylesheet"/>    
+    <script src="~/Scripts/bootstrap.js"></script>
+</head>
+<body>
+    <div class="container">
+     <div class="banner">
+            <div class="container">
+                <div>
+                    <h1 style="font-family:'Monotype Corsiva'">Dear Diary</h1>
+                </div>
+                <div>
+                <h5 style="font-family:Calibri">
+                    Lock your feelings, share your thoughts :)<br />
+                </h5>
+                </div>
+            </div>
+        </div>
+      <div>
+              <nav class="navbar navbar-inverse" role="navigation">
+                <div class="container-fluid">
+                    <ul class="nav navbar-nav navbar-left " style="margin-left:25px" >
+                        <li role="presentation" class="active" ><a href="/Client/OpenDiary" style="font-family:Calibri ;font-size:medium"><span class="glyphicon glyphicon-home"></span>  Home</a></li>
+                    </ul>
+                   <form class="navbar-form navbar-right" role="search" action="/Client/SearchDiary">
+                       <div class="form-group">
+                           <input type="text" name="Title" class="form-control" placeholder="Serach by Title" />
+                           <input type="text" name="Description" class="form-control" placeholder="Search by Content" />
+                           <input type="text" name="Date" class="form-control" placeholder="mm/dd/yyyy" />
+                       </div>
+                       <button type="submit" class="btn btn-default">Search</button>
+
+                   </form>        
+                </div>
+                  </nav>
+      </div>
+    @RenderBody()
+        </div>
+</body>
+</html>

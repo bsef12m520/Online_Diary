@@ -1,0 +1,126 @@
+﻿@{
+    ViewBag.Title = "SignUp";
+}
+@model OnlineDiary.Models.User
+@using OnlineDiary.Models
+<!Doctype HTML>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sign Up</title>
+         <style>
+            .rcorners {
+                border-radius: 25px; 
+                border: 2px solid #000000 ;
+                padding: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        
+        <div class="row" style="text-align:center">
+            <div class="col-sm-6 col-sm-offset-3 ">
+               
+        <h3 style="font-family:'Monotype Corsiva';margin-top:10px ;margin-bottom:10px; text-align:center"><span class="glyphicon glyphicon-user"></span> Sign Up</h3>
+        
+        <form class="rcorners"  action="/Home/AddUser" method="post" onclick="validate">
+            <input  type="text" placeholder="First Name" name="FirstName" required style="height:30px ; width:300px ;font-size:small; border-radius: 25px; border: 2px solid #D3D3D3; padding: 20px"  />
+            <br />
+            <br />
+            <input  type="text" placeholder="Last Name" name="LastName" style="height:30px ; width:300px ;font-size:small; border-radius: 25px; border: 2px solid #D3D3D3; padding: 20px;" required />
+            <br />
+            <br />
+            <input type="email" placeholder="Email" name="Email" id="Email" style="height:30px ; width:300px ;font-size:small ; border-radius: 25px; border: 2px solid #D3D3D3; padding: 20px;margin-left:70px"  required/>
+                <input type="button" id="b1" value="Check" style="width:60px;height:30px;font-size:13px;margin-left:10px"/>
+                <div id="result" style="text-align:right;font-size:10px;margin-right:150px"></div>
+                @Scripts.Render("~/bundles/jquery")
+            <br />
+            <br />
+            <input type="password" placeholder="Password" name="Password" style="height:30px ; width:300px ;font-size:small ; border-radius: 25px; border: 2px solid #D3D3D3; padding: 20px;" required />
+            <br />
+            <br />
+            <button type="submit"  class="btn btn-primary" style="height:40px ; width:300px">Sign Up</button>
+                
+        </form>
+             
+          
+            </div>
+        </div>
+            <script>
+
+                $(document).ready(function () {
+
+                    $('#checking').hide();
+
+                    $('#b1').click(function () {
+
+                        var email = $('#Email').val();
+
+                        //alert('User Name ='+ userName);
+                        $('#checking').show();
+                        $.getJSON("/Home/CheckEmail?Email=" + email, function (data) {
+                            $('#checking').hide();
+                            if (data) {
+                                $('#result').text("Email ID is not Available");
+
+                            }
+                            else {
+                                $('#result').text("Email ID is Available");
+                            }
+                        });
+
+                    });
+
+                });
+    </script>
+
+      @*  @using (Html.BeginForm("AddUser", "Home", new {@class="rcorners"}))
+                {
+                    @Html.AntiForgeryToken();
+                    @Html.ValidationSummary(true)
+                    
+                    <fieldset>
+                        <legend></legend>
+                     
+                    <div>
+
+                    @Html.TextBoxFor(m => m.FirstName, new {placeholder="First Name" ,type="text"  , style="height:30px ; width:300px ;font-size:small ; border-radius: 25px; border: 2px solid #D3D3D3; padding: 20px"}) 
+                    
+                    @Html.ValidationMessageFor(m=>m.FirstName)
+                    </div>
+                    <br />
+                    <br />
+
+                    <div>
+
+                    @Html.TextBoxFor(m => m.LastName, new {placeholder="Last Name" ,type="text"  , style="height:30px ; width:300px ;font-size:small ; border-radius: 25px; border: 2px solid #D3D3D3; padding: 20px"}) 
+                    
+                    @Html.ValidationMessageFor(m=>m.LastName)
+                    </div>
+                    <br />
+                    <br />
+                    
+                    <div>
+
+                    @Html.TextBoxFor(m => m.Email, new {placeholder="Email" ,type="text"  , style="height:30px ; width:300px ;font-size:small ; border-radius: 25px; border: 2px solid #D3D3D3; padding: 20px"}) 
+                    
+                    @Html.ValidationMessageFor(m=>m.Email)
+                    </div>
+                    <br />
+                    <br />
+                    <div>
+                    @Html.TextBoxFor(m => m.Password, new {placeholder="Password", type="password", style="height:30px ; width:300px ;font-size:small ; border-radius: 25px; border: 2px solid #D3D3D3; padding: 20px"}) 
+                    
+                    @Html.ValidationMessageFor(m=>m.Password)
+                    </div>                   
+                    <br />
+                    <br />
+                    <button type="submit" class="btn btn-primary" style="height:40px ; width:300px">SignUp</button>
+                      </fieldset>              
+                }
+            @section Scripts{
+            @Scripts.Render("~/bundles/jqueryval")
+            }*@
+
+    </body>
+</html>

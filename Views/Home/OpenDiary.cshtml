@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "OpenDiary";
+}
+<!Doctype HTML>
+<html>
+    <head>
+        <title>Open Diary</title>
+          <style>
+            .rcorners {
+                border-radius: 25px; 
+                border: 2px solid #000000 ;
+                padding: 20px;
+            }
+        </style>
+    
+   
+    </head>
+    <body>
+          <div style="text-align:center">
+              <h4>You are not Logged In</h4>
+              <br />
+
+                <div class="row" style="text-align:center">
+            <div class="col-sm-6 col-sm-offset-3 ">
+               
+        <h3 style="font-family:'Monotype Corsiva';margin-top:10px ;margin-bottom:10px; text-align:center"><span class="glyphicon glyphicon-log-in"></span> Login</h3>
+        
+        <form class="rcorners"  action="/Home/LoginVerification" method="post">
+            
+            <input type="email" placeholder="Email"  name="Email" required style="height:30px ; width:300px ;font-size:small ; border-radius: 25px; border: 2px solid #D3D3D3; padding: 20px;" />
+            <br />
+            <br />
+            <input type="password" placeholder="Password" name="Password" required style="height:30px ; width:300px ;font-size:small ; border-radius: 25px; border: 2px solid #D3D3D3; padding: 20px;" />
+            <br />
+            <br />
+            <button type="submit" class="btn btn-primary" style="height:40px ; width:300px">Login</button>
+                
+        </form>
+          </div> 
+                </div>
+              <br />
+              <h4>Don't have any account?</h4><a href="/Home/SignUp" style="text-decoration:none;font-size:20px">Register Yourself</a>
+              </div>
+
+       
+    </body>
+</html>
+

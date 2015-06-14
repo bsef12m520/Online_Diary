@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet"/>    
+    <script src="~/Scripts/bootstrap.js"></script>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    
+            <div class="banner">
+            <div class="container">
+                <div>
+                    <h1 style="font-family:'Monotype Corsiva'">Dear Diary</h1>
+                </div>
+                <div>
+                <h5 style="font-family:Calibri">
+                    Lock your feelings, share your thoughts :)<br />
+                </h5>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="container-fluid">
+         <ul class="nav navbar-nav " style="margin-left:25px" >
+             
+             
+             
+             <li role="presentation" class="active" ><a href="/Home/Index" style="font-family:Calibri ;font-size:medium">Home</a></li>
+             <li role="presentation" ><a href="/Home/About" style="font-family:Calibri ;font-size:medium">About</a></li>
+             <li role="presentation" ><a href="/Home/OpenDiary" style="font-family:Calibri ;font-size:medium">Your Diary</a></li>
+             <li role="presentation" ><a href="/Home/ContactUs" style="font-family:Calibri ;font-size:medium">Contact us</a></li>
+             
+             
+             
+         </ul>
+        <ul class="nav navbar-nav navbar-right" style="margin-right:25px">
+            <li><a href="/Home/SignUp" style="font-family:Calibri ;font-size:medium"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="/Home/Login" style="font-family:Calibri ;font-size:medium"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ul>
+             </div>
+            
+        </nav>
+        
+       
+
+    @RenderBody()
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+    
+</body>
+</html>
