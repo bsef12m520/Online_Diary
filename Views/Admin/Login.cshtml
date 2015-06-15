@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+@model OnlineDiary.Models.User
+<!Doctype HTML>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
+         <style>
+            .rcorners {
+                border-radius: 25px; 
+                border: 2px solid #000000 ;
+                padding: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        
+        <div class="row" style="text-align:center">
+            <div class="col-sm-6 col-sm-offset-3 ">
+               
+        <h3 style="font-family:'Monotype Corsiva';margin-top:10px ;margin-bottom:10px; text-align:center"><span class="glyphicon glyphicon-log-in"></span> Login</h3>
+
+                @using (Html.BeginForm("LoginVerification", "Admin", FormMethod.Post ,new {@class="rcorners"}))
+                {
+                    @Html.AntiForgeryToken();
+                    @Html.ValidationSummary(true)
+                    
+                    <fieldset>
+                        <legend></legend>
+                    <div>
+                    @Html.TextBoxFor(m => m.Email, new {placeholder="Email",required="true" ,type="Email"  , style="height:30px ; width:300px ;font-size:small ; border-radius: 25px; border: 2px solid #D3D3D3; padding: 20px"}) 
+                    
+                    @Html.ValidationMessageFor(m=>m.Email)
+                    </div>
+                    <br />
+                    <br />
+                    <div>
+                    @Html.TextBoxFor(m => m.Password, new {placeholder="Password" ,required="true", type="password", style="height:30px ; width:300px ;font-size:small ; border-radius: 25px; border: 2px solid #D3D3D3; padding: 20px"}) 
+                    
+                    @Html.ValidationMessageFor(m=>m.Password)
+                    </div>                   
+                    <br />
+                    <br />
+                    <button type="submit" class="btn btn-primary" style="height:40px ; width:300px">Login</button>
+                      </fieldset>              
+                }
+
+            </div>
+        </div>
+        @section Scripts{
+            @Scripts.Render("~/bundles/jqueryval")
+            }
+    </body>
+</html>
